@@ -3,23 +3,18 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 #include <unistd.h>
-#include <string.h>
 
 int main() {
-  int file  = open("test.txt", O_CREAT | O_RDWR);
+  int status;
   int rc = fork();
   if (rc < 0) {
     fprintf(stderr, "fork failed\n");
     exit(EXIT_FAILURE);
   } else if (rc == 0) {
-    write(file, "worked\n", strlen("worked\n"));
-    printf("%d\n", file);
+    printf("Hello\n");
+  } else {
+    waitpid(-1, &status, 0);
+    printf("Goodbye\n");
   }
-  else {
-    write(file, "outside\n", strlen("outside\n"));
-    printf("%d\n", file);
-  }
-
-  close(file);
   return 0;
 }

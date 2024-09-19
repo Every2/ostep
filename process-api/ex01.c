@@ -15,4 +15,6 @@ int main() {
     printf("inside fork %d\n", ++external_var);
   else
     printf("in main process %d\n", --external_var);
+
+  return 0;
 }
